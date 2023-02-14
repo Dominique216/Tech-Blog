@@ -1,0 +1,14 @@
+[
+    {
+        "title": "MVC", 
+        "content": "We just learned this. It's about structuring your codebase by using a seperation of concerns"
+    }, 
+    {
+        "title": "React", 
+        "content": "I'm excited to learn. I've heard about it a lot."
+    }, 
+    {
+        "title": "Handlebars", 
+        "content": "I think i'm starting to get the hang of this."
+    }
+]
