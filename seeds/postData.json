@@ -1,14 +1,17 @@
 [
     {
         "title": "MVC", 
-        "content": "We just learned this. It's about structuring your codebase by using a seperation of concerns"
+        "content": "We just learned this. It's about structuring your codebase by using a seperation of concerns", 
+        "user_id": 1
     }, 
     {
         "title": "React", 
-        "content": "I'm excited to learn. I've heard about it a lot."
+        "content": "I'm excited to learn. I've heard about it a lot.", 
+        "user_id": 2
     }, 
     {
         "title": "Handlebars", 
-        "content": "I think i'm starting to get the hang of this."
+        "content": "I think i'm starting to get the hang of this.", 
+        "user_id": 3
     }
 ]
