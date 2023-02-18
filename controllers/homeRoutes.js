@@ -1,6 +1,13 @@
 const router = require('express').Router();
 const { Post, User } = require('../models');
 
+// render NewPost card
+router.get('/newpost', (req, res) => {
+    if(req.session.loggedIn) {
+        res.render('newpost')
+    }
+})
+
 // render user's  posts 
 router.get('/dashboard', async(req, res) => {
     try {
