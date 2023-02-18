@@ -3,9 +3,18 @@ const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 // render EditPost card
-router.get('/editpost', (req, res) => {
-    if(req.session.loggedIn) {
-        res.render('editpost')
+router.get('/editpost', async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.session.user_id)
+        const post = postData.get({plain: true})
+        console.log(post)
+        res.render('editpost', {
+            post, 
+            loggedIn: true
+        });
+    } catch(err) {
+        console.log(err);
+        res.status(500).json(err)
     }
 })
 
@@ -17,7 +26,7 @@ router.get('/newpost', (req, res) => {
 })
 
 // render user's  posts 
-router.get('/dashboard',async(req, res) => {
+router.get('/dashboard', async(req, res) => {
     try {
         const postData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] }, 
@@ -25,10 +34,9 @@ router.get('/dashboard',async(req, res) => {
         })
 
         const post = postData.get({plain: true})
-        console.log(post)
         res.render('dashboard', {
             ...post, 
-            loggedIn: true
+            loggedIn: req.session.loggedIn
         });
     } catch(err) {
         console.log(err);

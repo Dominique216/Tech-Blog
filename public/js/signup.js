@@ -5,7 +5,7 @@ loginBtn.addEventListener('click', async (e) => {
     const name = document.getElementById('username').value.trim()
     const password = document.getElementById('password').value.trim()
 
-    if(name && password && email) {
+    if(name && password) {
         const response = await fetch('/api/users/signup', {
             method: 'POST', 
             body: JSON.stringify({ name, password }),
