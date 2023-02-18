@@ -1,5 +1,13 @@
 const router = require('express').Router();
 const { Post, User } = require('../models');
+const withAuth = require('../utils/auth');
+
+// render EditPost card
+router.get('/editpost', (req, res) => {
+    if(req.session.loggedIn) {
+        res.render('editpost')
+    }
+})
 
 // render NewPost card
 router.get('/newpost', (req, res) => {
@@ -9,7 +17,7 @@ router.get('/newpost', (req, res) => {
 })
 
 // render user's  posts 
-router.get('/dashboard', async(req, res) => {
+router.get('/dashboard',async(req, res) => {
     try {
         const postData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] }, 
@@ -31,7 +39,7 @@ router.get('/dashboard', async(req, res) => {
 // rendering login page
 router.get('/login', (req, res) => {
     if(req.session.loggedIn) {
-        document.location.redirect('/homepage')
+        res.redirect('/')
     } else {
         res.render('login')
     }
@@ -40,7 +48,7 @@ router.get('/login', (req, res) => {
 // rendering signup page
 router.get('/signup', (req, res) => {
     if(req.session.loggedIn) {
-        document.location.redirect('/homepage')
+       res.redirect('/')
     } else {
         res.render('signup')
     }
