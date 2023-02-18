@@ -1,6 +1,25 @@
 const router = require('express').Router();
 const { Post, User } = require('../models');
 
+// render user's  posts 
+router.get('/dashboard', async(req, res) => {
+    try {
+        const postData = await User.findByPk(req.session.user_id, {
+            attributes: { exclude: ['password'] }, 
+            include: [{ model: Post }],
+        })
+
+        const post = postData.get({plain: true})
+        console.log(post)
+        res.render('dashboard', {
+            ...post, 
+            loggedIn: true
+        });
+    } catch(err) {
+        console.log(err);
+        res.status(500).json(err)
+    }
+})
 
 // rendering login page
 router.get('/login', (req, res) => {
@@ -32,7 +51,7 @@ router.get('/', async (req, res) => {
     const posts= postData.map((post) => post.get({plain:true}))
     res.render('homepage', {
         posts, 
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn, 
     })
     } catch(err) {
         console.log(err)
