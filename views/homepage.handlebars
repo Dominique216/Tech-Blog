@@ -1,13 +1,23 @@
 {{#each posts as |post|}}
-<div class="card m-5">
+<div class="card mt-5 mx-5">
     <div class="card-header">
-        {{post.title}}<span class="float-right">{{user.name}} {{post.date_created}}</span>
+        {{post.title}}<span class="float-right">Posted By {{user.name}} on {{post.date_created}}</span>
     </div>
     <div class="card-body">
         {{post.content}}
-    </div>    
+    </div> 
+    <div class="card-footer">
+        <button id="comment-btn" class="btn btn-block btn-outline-info" type="button" data-type="{{post.id}}">Add Comment</button>
+    </div>   
 </div>
+<div class="card mx-5 my-1 text-center">
+    <div class="card-body">
+        {{comment.content}}
+    </div>
+</div>
+{{!-- call a partial that will render each commetn for the posts --}}
 {{/each}}
+<script src="/js/homepage.js"></script>
 {{!-- {{else}}
 <div class="card mt-5 mx-auto w-75">
     <div class="card-header text-center">

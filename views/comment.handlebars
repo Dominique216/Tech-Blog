@@ -1,0 +1,24 @@
+
+<div class="card m-5">
+    <div class="card-header">
+        {{post.title}}<span class="float-right">Posted By {{user.name}} on {{post.date_created}}</span>
+    </div>
+    <div class="card-body">
+        {{post.content}}
+    </div> 
+</div>
+<div class="card m-5">
+    <div class="card-header">
+        Comment
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <textarea class="form-control" id="comment-content" placeholder="Enter Comment here..."></textarea>
+            </div>
+            <div class="text-center">
+                <button id="add-comment"type="button" class="btn btn-outline-success btn-lg">Add Comment</button>
+            </div> 
+        </form>
+    </div>
+</div>

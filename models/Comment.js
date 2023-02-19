@@ -16,7 +16,7 @@ Comment.init(
             allowNull: false,
         }, 
         date_created: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
             defaultValue: DataTypes.NOW,
         }, 
@@ -33,7 +33,7 @@ Comment.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'post',
+        modelName: 'comment',
       }
 );
 
