@@ -3,13 +3,13 @@ const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 // render EditPost card
-router.get('/editpost', async (req, res) => {
+router.get('/editpost/:id', async (req, res) => {
     try {
-        const postData = await Post.findByPk(req.session.user_id)
+        const postData = await Post.findByPk(req.params.id)
         const post = postData.get({plain: true})
         console.log(post)
         res.render('editpost', {
-            post, 
+            post,
             loggedIn: true
         });
     } catch(err) {

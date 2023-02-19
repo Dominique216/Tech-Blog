@@ -6,17 +6,17 @@
           <form>
             <div class="form-group">
               <label for="post-title">Title</label>
-              <input id='filled-title' type="text" class="form-control" id="post-title" value="{{post.title}}">
+              <input id='filled-title' type="text" class="form-control" value="{{post.title}}">
             </div>
             <div class="form-group">
               <label for="post-content">Content</label>
-              <textarea id="filled-content" class="form-control" id="post-content">{{post.content}}</textarea>
+              <textarea id="filled-content" class="form-control">{{post.content}}</textarea>
             </div>
             <div class="text-center">
-              <button id="add-post"type="button" class="btn btn-outline-success btn-lg w-75 mb-3">Update Post</button>
+              <button id="add-post" type="button" class="btn btn-outline-success btn-lg w-75 mb-3" data-id="{{post.id}}">Update Post</button>
           </div> 
           <div class="text-center">
-              <button id="delete-post"type="button" class="btn btn-outline-success btn-lg w-75">Delete Post</button>
+              <button id="delete-post" type="button" class="btn btn-outline-success btn-lg w-75" data-id="{{post.id}}">Delete Post</button>
           </div> 
           </form>
         </div>

@@ -12,9 +12,17 @@ const postBtn = document.querySelectorAll('.post-btn')
 //     // send them to a page that will look like thenewpost screen but the infor from the post is already there
 // })
 
+
 postBtn.forEach(btn => btn.addEventListener('click', (e) => {
     e.preventDefault();
-    document.location.replace('/editpost')
+    const id = btn.getAttribute('data-type')
+    console.log(id)
+    document.location.replace(`/editpost/${id}`)
+    // if (e.target.hasAttribute('data-id')) {
+    //     const id = e.target.getAttribute('data-id')
+    //     document.location.replace(`/editpost/${id}`) 
+    // }
+   
     // send them to a page that will look like thenewpost screen but the infor from the post is already there
 }))
 // const updatePost = async (event) => {
