@@ -1,16 +1,16 @@
 const router = require('express').Router();
+const { response } = require('express');
 const { Post, User, Comment } = require('../models');
-const withAuth = require('../utils/auth');
-
-
 
 // render comment page 
 router.get('/comment/:id', async (req, res) => {
-    try {
+    if(req.session.loggedIn) {
+        try {
         const postData = await Post.findByPk(req.params.id)
         const post = postData.get({plain: true})
         console.log(post)
         res.render('comment', {
+            // post_id: req.params.id,
             post,
             loggedIn: true
         });
@@ -18,6 +18,10 @@ router.get('/comment/:id', async (req, res) => {
         console.log(err);
         res.status(500).json(err)
     }
+    } else {
+        res.redirect('/login')
+    }
+    
 })
 
 
@@ -46,7 +50,8 @@ router.get('/newpost', (req, res) => {
 
 // render user's posts on dashboard tab
 router.get('/dashboard', async(req, res) => {
-    try {
+    if(req.session.loggedIn) {
+         try {
         const postData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] }, 
             include: [{ model: Post }],
@@ -61,6 +66,10 @@ router.get('/dashboard', async(req, res) => {
         console.log(err);
         res.status(500).json(err)
     }
+    } else {
+        res.redirect('/login')
+    }
+   
 })
 
 // rendering login page
@@ -85,16 +94,35 @@ router.get('/signup', (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({ 
-            include: [ {
-                model: Comment, 
-                attributes: ['content']
-            }, {
+            include: [{
+                model:Comment,
+                // attributes: ['content', 'date_created']
+                include: [{model: User}]
+            },
+            {
                 model: User, 
                 attributes: ['name']
-            }]
-        })
+            }], 
+        // const postData = await Post.findAll({
+        //     include: [{model: Comment}]
+           }) 
+
+        // const commentData = await Post.findAll({ 
+        //     include: [{
+        //         model:Comment,
+        //         attributes: ['content', 'date_created', 'user_id']
+        //     }], 
+        // })
+        // const commentData = await  Comment.findAll({
+        //     include: [ {model: User, attributes:{ exclude:['password'] }}]
+        // })
+
     const posts= postData.map((post) => post.get({plain:true}))
+    // const commentusername = commentData.map((post) => post.get({plain:true}))
     console.log(posts)
+    // console.log(commentusername)
+    // console.log(comments)
+    // res.status(200).json(posts)
     res.render('homepage', {
         posts, 
         loggedIn: req.session.loggedIn, 
@@ -106,5 +134,28 @@ router.get('/', async (req, res) => {
     
 })
 
+router.get('/comments', async (req, res) => {
+    try {
+       const allComments = await Comment.findAll() 
+       res.status(200).json(allComments)
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+
+router.get('/posts', async (req, res) => {
+    try {
+       const allComments = await Post.findAll({
+        include: [{model: Comment}]
+       }) 
+       res.status(200).json(allComments)
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
 
 module.exports = router;

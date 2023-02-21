@@ -1,3 +1,4 @@
+<h1 class="m-5">Posts</h1>
 {{#each posts as |post|}}
 <div class="card mt-5 mx-5">
     <div class="card-header">
@@ -10,18 +11,17 @@
         <button id="comment-btn" class="btn btn-block btn-outline-info" type="button" data-type="{{post.id}}">Add Comment</button>
     </div>   
 </div>
-<div class="card mx-5 my-1 text-center">
+{{#each comments as |comment|}}
+<div id="comment-section"class="card mx-auto my-3 text-center w-75" data-type="{{post.id}}">
+    <div class ="card-header float-right">
+       Comment posted by {{comment.user.name}} on {{comment.date_created}}
+    </div>
     <div class="card-body">
         {{comment.content}}
     </div>
 </div>
-{{!-- call a partial that will render each commetn for the posts --}}
+{{/each}}
 {{/each}}
 <script src="/js/homepage.js"></script>
-{{!-- {{else}}
-<div class="card mt-5 mx-auto w-75">
-    <div class="card-header text-center">
-        <h2>Please login to see posts</h2>
-    </div>
-</div> --}}
+
 

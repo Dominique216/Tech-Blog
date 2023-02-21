@@ -14,11 +14,12 @@
     <div class="card-body">
         <form>
             <div class="form-group">
-                <textarea class="form-control" id="comment-content" placeholder="Enter Comment here..."></textarea>
+                <textarea id="comment-content" class="form-control" id="comment-content" placeholder="Enter Comment here..."></textarea>
             </div>
             <div class="text-center">
-                <button id="add-comment"type="button" class="btn btn-outline-success btn-lg">Add Comment</button>
+                <button id="add-comment"type="button" class="btn btn-outline-success btn-lg" data-type="{{post.id}}">Add Comment</button>
             </div> 
         </form>
     </div>
 </div>
+<script src="/js/comment.js"></script>
