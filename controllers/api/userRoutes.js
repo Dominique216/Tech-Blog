@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// saves new user and session info
 router.post('/signup', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -18,6 +19,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// find if user exists then saves session data
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { name: req.body.name } });
@@ -51,6 +53,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// destroys session data
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {

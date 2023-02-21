@@ -1,3 +1,4 @@
+// handles fetching the post request that will save new user data to the database when the submit button is pressed on the signup page
 const loginBtn = document.getElementById('submit');
 
 loginBtn.addEventListener('click', async (e) => {

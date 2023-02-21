@@ -1,4 +1,6 @@
+{{!-- creates the home tab page --}}
 <h1 class="m-5">Posts</h1>
+{{!-- grabs each post and creates a card with a comment buton and creates the comments for each post --}}
 {{#each posts as |post|}}
 <div class="card mt-5 mx-5">
     <div class="card-header">
@@ -11,6 +13,7 @@
         <button id="comment-btn" class="btn btn-block btn-outline-info" type="button" data-type="{{post.id}}">Add Comment</button>
     </div>   
 </div>
+{{!-- iterates over each comment associated with a post and creates a comment card underneth it --}}
 {{#each comments as |comment|}}
 <div id="comment-section"class="card mx-auto my-3 text-center w-75" data-type="{{post.id}}">
     <div class ="card-header float-right">

@@ -1,3 +1,4 @@
+// handles fecthing the post request and sending the data that the user input in the comment card to it then relocating to the updated home page
 const addBtn = document.querySelector('#add-comment')
 
 addBtn.addEventListener('click', async (e) => {

@@ -16,21 +16,7 @@ router.post('/', async (req, res) => {
     }
   });
 
-// update post
-// router.put('/:id', withAuth, async (req, res) => {
-//   try{
-//       const newScore = await User.update(req.body, {
-//           where: {
-//               id: req.params.id,
-//           }, 
-//       })
-//       res.status(200).json(newScore)
-//   } catch (err) {
-//       console.log(req)
-//       console.log(err)
-//       res.status(500).json(err)
-//   }     
-// })
+// updates post
 router.put('/:id', async (req, res) => {
   try{
       const updatePost = await Post.update(req.body, {
@@ -52,7 +38,6 @@ router.delete('/delete/:id', async (req, res) => {
       const deletePost = await Post.destroy({
           where: {
               id: req.params.id,
-              // user_id: req.session.user_id,
           }, 
       })
       console.log(deletePost)

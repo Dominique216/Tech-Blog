@@ -1,3 +1,4 @@
+// handles fetching the post request that will find the user-data and start a new user session when the  login button is pressed on the login page
 
 const loginBtn = document.getElementById('submit');
 
