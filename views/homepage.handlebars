@@ -11,19 +11,30 @@
     </div> 
     <div class="card-footer">
         <button id="comment-btn" class="btn btn-block btn-outline-info" type="button" data-type="{{post.id}}">Add Comment</button>
+        <button id='view-comments-btn' class="float-right btn btn-link" data-type="{{post.id}}"><em>{{post.comments.length}} comment(s)</em></button>
     </div>   
 </div>
 {{!-- iterates over each comment associated with a post and creates a comment card underneth it --}}
-{{#each comments as |comment|}}
-<div id="comment-section"class="card mx-auto my-3 text-center w-75" data-type="{{post.id}}">
-    <div class ="card-header float-right">
-       Comment posted by {{comment.user.name}} on {{comment.date_created}}
+  {{#each comments as |comment|}}
+<div id="comment-section"class="card mx-auto my-3 w-75 d-none" data-type="{{post.id}}">
+    <div class ="card-header text-right">
+       Comment posted by {{comment.user.name}} on {{comment.date_created}} 
+        {{#if comment.belongsToUser}}
+        <button type="button" class="btn btn-secondary m-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                </svg>
+        </button>
+         <button type="button" class="btn btn-secondary m-2">
+            Update
+        </button>
+    {{/if}}
     </div>
     <div class="card-body">
         {{comment.content}}
     </div>
 </div>
-{{/each}}
+{{/each}}  
 {{/each}}
 <script src="/js/homepage.js"></script>
 

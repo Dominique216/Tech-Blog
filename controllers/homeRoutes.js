@@ -103,7 +103,13 @@ router.get('/', async (req, res) => {
             }], 
            }) 
 
-    const posts= postData.map((post) => post.get({plain:true}))
+    const posts= postData.map((post) => {
+        const obj = post.get({plain:true})
+        for( var comment of obj.comments){
+            comment.belongsToUser = comment.user_id === req.session.user_id;
+        }
+        return obj;
+    })
 
     res.render('homepage', {
         posts, 

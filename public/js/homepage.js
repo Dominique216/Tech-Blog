@@ -11,3 +11,24 @@ commentBtn.forEach(btn => {
     })
 })
 
+// adds functionality to the view comments btn
+const viewComments = document.querySelectorAll('#view-comments-btn');
+const comments = document.querySelectorAll('#comment-section');
+
+viewComments.forEach((btn) => {
+    btn.addEventListener('click',(e) => {
+        e.preventDefault();
+        comments.forEach(comment => {
+            const btnId = btn.getAttribute('data-type');
+            const commentId = comment.getAttribute('data-type');  
+            if(btnId === commentId) {
+                if(comment.classList.contains('d-none')) {
+                    comment.classList.remove('d-none')
+                } else {
+                    comment.classList.add('d-none')
+                }
+            } 
+        })
+
+    })
+})
