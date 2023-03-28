@@ -1,5 +1,5 @@
 {{!-- creates the home tab page --}}
-<h1 class="m-5">Posts</h1>
+<h1 class="m-5  text-light">Posts</h1>
 {{!-- grabs each post and creates a card with a comment buton and creates the comments for each post --}}
 {{#each posts as |post|}}
 <div class="card mt-5 mx-5">
@@ -11,7 +11,7 @@
     </div> 
     <div class="card-footer">
         <button id="comment-btn" class="btn btn-block btn-outline-info" type="button" data-type="{{post.id}}">Add Comment</button>
-        <button id='view-comments-btn' class="float-right btn btn-link" data-type="{{post.id}}"><em>{{post.comments.length}} comment(s)</em></button>
+        <button id='view-comments-btn' class="float-right btn btn-link text-info" data-type="{{post.id}}"><em>{{post.comments.length}} comment(s)</em></button>
     </div>   
 </div>
 {{!-- iterates over each comment associated with a post and creates a comment card underneth it --}}
@@ -25,9 +25,9 @@
                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                 </svg>
         </button>
-         <button type="button" class="btn btn-secondary m-2">
+         {{!-- <button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="upda">
             Update
-        </button>
+        </button> --}}
     {{/if}}
     </div>
     <div class="card-body">

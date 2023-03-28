@@ -1,11 +1,11 @@
  {{!-- creates a button to display each post a user has made for the dashboard tab --}}
  {{#each posts as |post|}}
         <div class="text-center">
-            <button type="button" class="btn btn-secondary btn-lg w-75 mt-5 post-btn" data-type="{{post.id}}">{{post.title}}</button>
+            <button type="button" class="btn btn-secondary btn-lg w-75 mt-5 post-btn" data-type="{{post.id}}">{{post.title}} created on {{post.date_created}}</button>
         </div>
   {{/each}}
 <div class="text-center">
-    <button id="add-post"type="button" class="btn btn-outline-success btn-lg my-5 w-75">Add Post</button>
+    <button id="add-post"type="button" class="btn btn-outline-light btn-lg my-5 w-75">Add Post</button>
 </div> 
 
 <script src="/js/dashboard.js"></script>
