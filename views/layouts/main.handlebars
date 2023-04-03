@@ -20,9 +20,15 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/">Home</a>
                 </li>
+                {{#if loggedIn}}
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/dashboard">Dashboard</a>
+                    <a class="nav-link text-light" href="/dashboard/{{id}}">Dashboard</a>
                 </li>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/login">Dashboard</a>
+                </li>
+                {{/if}}
                 {{!-- will render logout button if the user is logged in or a login button is the user is logged out --}}
                 {{#if loggedIn}}
                 <li class="nav-item">

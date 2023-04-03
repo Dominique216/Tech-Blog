@@ -21,12 +21,17 @@ User.init(
         type: DataTypes.STRING,
         allowNull: false,
       },
+      
       password: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: [8],
         },
+      },
+      bio: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {

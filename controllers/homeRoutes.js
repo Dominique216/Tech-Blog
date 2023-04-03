@@ -8,10 +8,11 @@ router.get('/comment/:id', async (req, res) => {
         try {
         const postData = await Post.findByPk(req.params.id)
         const post = postData.get({plain: true})
-        console.log(post)
+        // console.log(post)
         res.render('comment', {
             post,
-            loggedIn: true
+            loggedIn: true, 
+            id: req.session.user_id
         });
     } catch(err) {
         console.log(err);
@@ -29,10 +30,11 @@ router.get('/editpost/:id', async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id)
         const post = postData.get({plain: true})
-        console.log(post)
+        // console.log(post)
         res.render('editpost', {
             post,
-            loggedIn: true
+            loggedIn: true, 
+            id: req.session.user_id
         });
     } catch(err) {
         console.log(err);
@@ -43,23 +45,25 @@ router.get('/editpost/:id', async (req, res) => {
 // render NewPost card
 router.get('/newpost', (req, res) => {
     if(req.session.loggedIn) {
-        res.render('newpost')
+        res.render('newpost', {id: req.session.user_id})
     }
 })
 
 // render user's posts on dashboard tab
-router.get('/dashboard', async(req, res) => {
+router.get('/dashboard/:id', async(req, res) => {
     if(req.session.loggedIn) {
          try {
-        const postData = await User.findByPk(req.session.user_id, {
+        const postData = await User.findByPk(req.params.id, {
             attributes: { exclude: ['password'] }, 
             include: [{ model: Post }],
         })
 
         const post = postData.get({plain: true})
+        console.log(post)
         res.render('dashboard', {
             ...post, 
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            id: req.session.user_id
         });
     } catch(err) {
         console.log(err);
@@ -114,6 +118,7 @@ router.get('/', async (req, res) => {
     res.render('homepage', {
         posts, 
         loggedIn: req.session.loggedIn, 
+        id: req.session.user_id
     })
     } catch(err) {
         console.log(err)
