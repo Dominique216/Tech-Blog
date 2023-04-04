@@ -1,5 +1,18 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const multer = require('multer')
+const path = require('path')
+
+// 
+router.get('/', async (req, res) => {
+  try {
+    const allUsers = await User.findAll()
+    res.status(200).json(allUsers)
+  } catch (err) {
+    console.log(err)
+  }
+  
+})
 
 // saves new user and session info
 router.post('/signup', async (req, res) => {
@@ -77,5 +90,42 @@ router.post('/logout', (req, res) => {
   }
 });
 
+// stores image file
+const storage = multer.diskStorage({
+  destination: 'uploads',
+  filename: (req, file, cb) => {
+      cb(null, Date.now() + file.originalname)
+  }
+})
+// upload avatar image file
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: '1000000' },
+  // fileFilter: (req, file, cb) => {
+  //     const fileTypes = /jpeg|jpg|png|gif/
+  //     const mimeType = fileTypes.test(file.mimetype)  
+  //     const extname = fileTypes.test(file.originalname)
+
+  //     if(mimeType && extname) {
+  //         return cb(null, true)
+  //     }
+  //     cb('Give proper files formate to upload')
+  // }
+}).single('image')
+
+// updates user avatar
+router.put('/image/:id', (req, res) => { 
+  upload(req, res, (err) => {
+    if(err) {
+      console.log(err)
+    } else { 
+      const newImage = User.update(
+        {image: req.file.filename}, 
+        {where: { id: req.params.id}})
+        res.status(200).json(newImage)
+    }
+  })
+  
+})
 
 module.exports = router;

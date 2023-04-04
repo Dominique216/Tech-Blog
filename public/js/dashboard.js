@@ -81,3 +81,48 @@ if(addBio) {
         handleAddBio(e);
     })
 }
+
+
+// const avatar = document.getElementById('avatar-pic');
+// avatar.defaultValue = "https://ionicframework.com/docs/img/demos/avatar.svg";
+
+const addPicBtn = document.getElementById('add-pic');
+
+const handlePicUpload = async (e) => {
+    const avatar = document.getElementById('avatar-pic').files[0];
+    const formData = new FormData();
+        // const data = 
+    formData.append('image', avatar)
+
+    const id = e.target.getAttribute('data-target')
+    console.log(avatar)
+    if(avatar) {
+        const response = await fetch(`/api/users/image/${id}`, {
+            method: 'PUT',
+            body: formData
+            // body: JSON.stringify({
+            //     file: avatar
+            // }), 
+            // headers: { 'Content-Type': 'application/json' },
+        })
+        if (response.ok) {
+            document.location.reload();
+        } else {
+            alert(response.statusText)
+            console.error()
+            // .catch(err => console.log(err))
+        }
+    }
+}
+
+addPicBtn.addEventListener('click', (e) =>{
+    e.preventDefault();
+    handlePicUpload(e);
+})
+
+const avatar = document.getElementById('avatar')
+
+const avatarFile = avatar.getAttribute('data-type')
+console.log(avatarFile)
+
+avatar.setAttribute('src', `/uploads/${avatarFile}`)

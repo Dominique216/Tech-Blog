@@ -17,11 +17,14 @@ User.init(
         primaryKey: true,
         autoIncrement: true,
       },
+      image: {
+        type: DataTypes.STRING,
+        defaultValue:"user.png"
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      
       password: {
         type: DataTypes.STRING,
         allowNull: false,

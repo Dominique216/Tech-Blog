@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create({});
 
+app.use('/uploads', express.static('./uploads'))
+
 const sess = {
   secret: 'Super secret secret',
   cookie: {

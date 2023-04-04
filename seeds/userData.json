@@ -1,14 +1,17 @@
 [
     {
        "name": "John", 
-       "password": "password1234"
+       "password": "password1234", 
+        "image" : "stock-man.jpg"
     }, 
     {
-        "name": "Sally",
-        "password": "helloworld12"
+        "name": "Sarah",
+        "password": "helloworld12", 
+        "image" : "stock-woman.jpg"
     }, 
     {
         "name": "Sam", 
-        "password": "heythere123"
+        "password": "heythere123", 
+        "image" : "stock-woman2.jpg"
     }
 ]
