@@ -14,10 +14,10 @@
               <textarea id="filled-content" class="form-control">{{post.content}}</textarea>
             </div>
             <div class="text-center">
-              <button id="add-post" type="button" class="btn btn-outline-success btn-lg w-75 mb-3" data-id="{{post.id}}">Update Post</button>
+              <button id="add-post" type="button" class="btn btn-outline-success btn-lg w-75 mb-3" data-target="{{id}}" data-id="{{post.id}}">Update Post</button>
           </div> 
           <div class="text-center">
-              <button id="delete-post" type="button" class="btn btn-outline-success btn-lg w-75" data-id="{{post.id}}">Delete Post</button>
+              <button id="delete-post" type="button" class="btn btn-outline-success btn-lg w-75" data-target="{{id}}" data-id="{{post.id}}">Delete Post</button>
           </div> 
           </form>
         </div>

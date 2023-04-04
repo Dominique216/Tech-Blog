@@ -8,6 +8,7 @@ updateBtn.addEventListener('click', async (event) => {
     // if data-id is defined from the handlebars page grab it and set is as variable id
     if (event.target.hasAttribute('data-id')) {
       const id = event.target.getAttribute('data-id')
+      const userid = event.target.getAttribute('data-target')
       // fetch request to api routes that sends the new info
       const response = await fetch(`/api/post/${id}`, {
         method: 'PUT',
@@ -21,7 +22,7 @@ updateBtn.addEventListener('click', async (event) => {
       })
       if (response.ok) {
         // redirects back to updated dashboard
-        document.location.replace('/dashboard');
+        document.location.replace(`/dashboard/${userid}`);
       } else {
         alert('Failed to update post');
       }
@@ -35,12 +36,13 @@ updateBtn.addEventListener('click', async (event) => {
     // grabs the data-id value
     if (e.target.hasAttribute('data-id')) {
         const id = e.target.getAttribute('data-id')
+        const userid = e.target.getAttribute('data-target')
         // uses data-id variable from handles-bar page to delete the correct post
         const response = await fetch(`/api/post/delete/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {
-          document.location.replace('/dashboard');
+          document.location.replace(`/dashboard/${userid}`);
         } else {
           alert('Failed to delete post');
         }
