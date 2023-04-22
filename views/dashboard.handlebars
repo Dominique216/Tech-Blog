@@ -1,5 +1,5 @@
- {{!-- creates a button to display each post a user has made for the dashboard tab --}}
 
+ {{!-- creates a button to display each post a user has made for the dashboard tab --}}
  <div class="d-flex flex-column flex-md-row align-items-center">
  <div class="w-50 card mt-5 ml-md-5 text-center">
     <img id="avatar" class="rounded-circle mx-auto mt-2 object-fit-scale" style="width: 150px; height: 150px;"
@@ -11,7 +11,7 @@
     <button id="add-pic" type="button" class="btn btn-outline-info btn-sm" data-target="{{id}}">Submit</button>    --}}
     </div>
     
-    <h4 class="m-5">{{name}}</h4>
+    <h4 class="m-5">{{name}} {{id}} {{user_id}}</h4>
   {{!-- bio section need to add an input to add a bio, then do a post method in js file to add or update to user model --}}
     {{!-- also need to have two diff views one where you are view your own  profile, and one where you view other peoples.--}}
     {{!-- this will be the own profile view so you can edit stuff. I'll add another otherdashbord handlebars page where you can only view and not edit stuff --}}
@@ -43,16 +43,14 @@
                 </div>
             </div>
         </div> --}}
-    {{/if}}        
+    {{/if}} 
+           
     <button id="update-bio" type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-outline-info mb-5 mx-5">Update Profile</button>
          <div class="modal fade" id="updateModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title mx-auto">Update Profile</h5>
-                         {{!-- <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span>
-                        </button> --}}
                     </div>
                     <div class="modal-body">
                         <form enctype="multipart/form-data" >
@@ -79,6 +77,7 @@
             </div>
         </div>
  </div>
+ 
  <div class="w-50 text-center text-white ml-md-5">
     <h2 class="mt-5">My Posts</h2>
     {{#each posts as |post|}}
@@ -91,6 +90,8 @@
     </div> 
  </div>    
  </div>
+{{#ifCurrentUser id user_id}} 
+{{/ifCurrentUser}}  
 
 
 <script src="/js/dashboard.js"></script>

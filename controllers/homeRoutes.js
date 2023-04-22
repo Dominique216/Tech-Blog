@@ -2,6 +2,13 @@ const router = require('express').Router();
 const { response } = require('express');
 const { Post, User, Comment } = require('../models');
 
+// render search user page
+router.get('/search', (req, res) => {
+    if(req.session.loggedIn) {
+        res.render('search', {id: req.session.user_id})
+    }
+})
+
 // render comment page 
 router.get('/comment/:id', async (req, res) => {
     if(req.session.loggedIn) {
@@ -63,7 +70,8 @@ router.get('/dashboard/:id', async(req, res) => {
         res.render('dashboard', {
             ...post, 
             loggedIn: req.session.loggedIn,
-            id: req.session.user_id
+            id: req.session.user_id, 
+            user_id: req.params.id
         });
     } catch(err) {
         console.log(err);

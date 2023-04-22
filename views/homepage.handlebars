@@ -4,7 +4,14 @@
 {{#each posts as |post|}}
 <div class="card mt-5 mx-5">
     <div class="card-header align-middle text-center">
-        <span class="float-left"><img id="avatar" data-type="{{user.image}}" style="width: 3.5rem; height: 3.5rem" class='rounded-circle object-fit-scale mr-2'/>{{user.name}}</span>{{post.title}}<span class="float-right">{{post.date_created}}</span>
+        <span class="float-left">
+            <a href="/dashboard/{{user_id}}"><img id="avatar" data-type="{{user.image}}" style="width: 3.5rem; height: 3.5rem" class='rounded-circle object-fit-scale mr-2'/>
+            {{user.name}}</a>
+        </span>
+        {{post.title}}
+        <span class="float-right">
+            {{post.date_created}}
+        </span>
     </div>
     <div class="card-body">
         {{post.content}}
@@ -18,7 +25,11 @@
   {{#each comments as |comment|}}
 <div id="comment-section"class="card mx-auto my-3 w-75 d-none" data-type="{{post.id}}">
     <div class ="card-header text-right">
-       <span class="float-left"><img id="avatar" data-type="{{comment.user.image}}" style="width: 3.5rem; height: 3.5rem" class='rounded-circle mr-2 object-fit-scale'/>{{comment.user.name}}</span>{{comment.date_created}} 
+       <span class="float-left">
+            <img id="avatar" data-type="{{comment.user.image}}" style="width: 3.5rem; height: 3.5rem" class='rounded-circle mr-2 object-fit-scale'/>
+            {{comment.user.name}}
+        </span>
+        {{comment.date_created}} 
         {{#if comment.belongsToUser}}
         <button type="button" class="btn btn-secondary m-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
