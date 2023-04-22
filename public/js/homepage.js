@@ -32,3 +32,15 @@ viewComments.forEach((btn) => {
 
     })
 })
+
+const avatar = document.querySelectorAll('#avatar')
+console.log(avatar[0].getAttribute('data-type'))
+
+// const avatarFile = avatar.forEach(user => user.getAttribute('data-type'))
+// console.log(avatarFile)
+for(let i = 0; i < avatar.length; i++) {
+    const avatarFile = avatar[i].getAttribute('data-type')
+    // console.log(avatarFile)
+    avatar[i].setAttribute('src', `/uploads/${avatarFile}`)
+}
+

@@ -19,7 +19,7 @@ User.init(
       },
       image: {
         type: DataTypes.STRING,
-        defaultValue:"user.png"
+        defaultValue: "user.png"
       },
       name: {
         type: DataTypes.STRING,

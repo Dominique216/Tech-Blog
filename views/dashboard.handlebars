@@ -2,13 +2,13 @@
 
  <div class="d-flex flex-column flex-md-row align-items-center">
  <div class="w-50 card mt-5 ml-md-5 text-center">
-    <img id="avatar" class="rounded-circle mx-auto mt-2 object-fit-cover" style="width: 150px; height: 150px;"
+    <img id="avatar" class="rounded-circle mx-auto mt-2 object-fit-scale" style="width: 150px; height: 150px;"
     alt="Default Avatar" data-type='{{image}}' />
     <div class="d-flex justify-content-center">
-        <form  enctype="multipart/form-data" class="w-50">
+        {{!-- <form  enctype="multipart/form-data" class="w-50">
             <input id="avatar-pic" type="file" name="image" />
         </form>
-    <button id="add-pic" type="button" class="btn btn-outline-info btn-sm" data-target="{{id}}">Submit</button>   
+    <button id="add-pic" type="button" class="btn btn-outline-info btn-sm" data-target="{{id}}">Submit</button>    --}}
     </div>
     
     <h4 class="m-5">{{name}}</h4>
@@ -18,15 +18,16 @@
     {{#if bio}}
         <p class="m-2">{{bio}}</p>
     {{else}}
-        <button type="button" id="add-bio" data-toggle="modal" data-target="#addModal" class="btn btn-outline-info mb-5 mx-5">Add Bio</button>
+        <p><em>Add a bio here...</em></p>
+        {{!-- <button type="button" id="add-bio" data-toggle="modal" data-target="#addModal" class="btn btn-outline-info mb-5 mx-5">Add Bio</button>
         <div class="modal fade" id="addModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title mx-auto">Create Bio</h5>
-                         {{!-- <button type="button" class="close" data-dismiss="modal">
+                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
-                        </button> --}}
+                        </button>
                     </div>
                     <div class="modal-body">
                         <form>
@@ -41,7 +42,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     {{/if}}        
     <button id="update-bio" type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-outline-info mb-5 mx-5">Update Profile</button>
          <div class="modal fade" id="updateModal">
@@ -54,7 +55,12 @@
                         </button> --}}
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form enctype="multipart/form-data" >
+                            <div class="form-group">
+                                <label for="avatar-pic">Avatar</label>
+                                    <input id="avatar-pic" type="file" name="image" />
+                                <button id="add-pic" type="button" class="btn btn-outline-info btn-sm" data-target="{{id}}">Submit</button> 
+                            </div>
                             <div class="form-group">
                                 <label for="username-update">Username</label>
                                 <input class="form-control" id="username-update" data-value="{{name}}"></input>

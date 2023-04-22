@@ -29,6 +29,11 @@ defaultName.defaultValue = defaultValueName;
 const handleUpdateUser = async (e) => {
     const username = document.getElementById('username-update').value.trim();
     const bioText = document.getElementById('bio-text-update').value.trim();
+    const avatar = document.getElementById('avatar-pic').files[0];
+    const formData = new FormData();
+    console.log(avatar)
+    console.log(formData)
+    formData.append('image', avatar)
     const id = e.target.getAttribute('data-target')
     if(username && bioText) {
         const response = await fetch(`/api/users/${id}`, {
@@ -46,6 +51,18 @@ const handleUpdateUser = async (e) => {
             alert(response.statusText);
         }
     }
+    if(avatar) {
+        const AvResponse = await fetch(`/api/users/image/${id}`, {
+            method: 'PUT',
+            body: formData, 
+        })
+        if (AvResponse.ok) {
+            document.location.reload();
+        } else {
+            console.log(AvResponse)
+            alert(AvResponse.statusText);
+        }
+    }
 }
 
 const updatebtn = document.getElementById('update-profile-submit')
@@ -55,32 +72,32 @@ updatebtn.addEventListener('click', (e) =>{
     handleUpdateUser(e);
 })
 // will add the bio the user inputs to the database
-const handleAddBio = async (e) => {
-    const bioText = document.getElementById('bio-text').value.trim();
-    const id = e.target.getAttribute('data-target')
-    if (bioText) {
-        const response = await fetch(`/api/bio/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify({ bio: bioText }), 
-            headers: { 'Content-Type': 'application/json' },
-        })
-        if (response.ok) {
-            document.location.reload();
-        } else {
-            console.log(response)
-            alert(response.statusText);
-        }
-    }
-}
+// const handleAddBio = async (e) => {
+//     const bioText = document.getElementById('bio-text').value.trim();
+//     const id = e.target.getAttribute('data-target')
+//     if (bioText) {
+//         const response = await fetch(`/api/bio/${id}`, {
+//             method: 'PUT',
+//             body: JSON.stringify({ bio: bioText }), 
+//             headers: { 'Content-Type': 'application/json' },
+//         })
+//         if (response.ok) {
+//             document.location.reload();
+//         } else {
+//             console.log(response)
+//             alert(response.statusText);
+//         }
+//     }
+// }
 
-const addBio = document.getElementById('add-bio-submit');
+// const addBio = document.getElementById('add-bio-submit');
 
-if(addBio) {
-    addBio.addEventListener('click', (e) =>{
-        e.preventDefault();
-        handleAddBio(e);
-    })
-}
+// if(addBio) {
+//     addBio.addEventListener('click', (e) =>{
+//         e.preventDefault();
+//         handleAddBio(e);
+//     })
+// }
 
 
 // const avatar = document.getElementById('avatar-pic');
