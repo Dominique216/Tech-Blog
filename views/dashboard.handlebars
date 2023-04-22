@@ -1,4 +1,4 @@
-
+{{#if isCurrentUser}}
  {{!-- creates a button to display each post a user has made for the dashboard tab --}}
  <div class="d-flex flex-column flex-md-row align-items-center">
  <div class="w-50 card mt-5 ml-md-5 text-center">
@@ -11,38 +11,11 @@
     <button id="add-pic" type="button" class="btn btn-outline-info btn-sm" data-target="{{id}}">Submit</button>    --}}
     </div>
     
-    <h4 class="m-5">{{name}} {{id}} {{user_id}}</h4>
-  {{!-- bio section need to add an input to add a bio, then do a post method in js file to add or update to user model --}}
-    {{!-- also need to have two diff views one where you are view your own  profile, and one where you view other peoples.--}}
-    {{!-- this will be the own profile view so you can edit stuff. I'll add another otherdashbord handlebars page where you can only view and not edit stuff --}}
+    <h4 class="m-5">{{name}}</h4>
     {{#if bio}}
         <p class="m-2">{{bio}}</p>
     {{else}}
         <p><em>Add a bio here...</em></p>
-        {{!-- <button type="button" id="add-bio" data-toggle="modal" data-target="#addModal" class="btn btn-outline-info mb-5 mx-5">Add Bio</button>
-        <div class="modal fade" id="addModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title mx-auto">Create Bio</h5>
-                         <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <textarea class="form-control" id="bio-text" placeholder="Enter bio here...."></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button id="add-bio-submit" type="button" class="btn btn-primary" data-target="{{id}}">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
     {{/if}} 
            
     <button id="update-bio" type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-outline-info mb-5 mx-5">Update Profile</button>
@@ -90,8 +63,38 @@
     </div> 
  </div>    
  </div>
-{{#ifCurrentUser id user_id}} 
-{{/ifCurrentUser}}  
+ <script src="/js/dashboard.js"></script>
+{{else}}
+        {{!-- creates a button to display each post a user has made for the dashboard tab --}}
+ <div class="d-flex flex-column flex-md-row mx-3 align-items-center">
+    <div class="w-50 card mt-5 ml-md-5 text-center h-50">
+        <img id="avatar" class="rounded-circle mx-auto mt-2 object-fit-scale" style="width: 150px; height: 150px;"
+        alt="Default Avatar" data-type='{{image}}' />
+        <h4 class="m-5">{{name}}</h4>
+        {{#if bio}}
+            <p class="m-2">{{bio}}</p>
+        {{/if}}
+    </div>
+    <div class="w-50 text-center text-white ml-md-5">
+        <h2 class="mt-5">{{name}}'s Posts</h2>
+    {{#each posts as |post|}}
+        <div class="card mt-5">
+                <div class="card-header text-center text-dark">
+                    {{post.title}}
+                </div>
+                <div class="card-body  text-dark">
+                    {{post.content}}
+                </div> 
+                 <div class="card-footer">
+                    <button id="comment-btn" class="btn btn-block btn-outline-info" type="button" data-type="{{post.id}}">Add Comment</button>
+                    <button id='view-comments-btn' class="float-right btn btn-link text-info" data-type="{{post.id}}"><i style="font-size: 1.5rem" class="fa-solid fa-comment-dots"></i></button>
+                </div>   
+        </div>
+    {{/each}}
+    <div class="text-center">
+        <button id="add-post"type="button" class="btn btn-outline-light btn-lg my-5 w-75">Add Post</button>
+    </div> 
+ </div>  
+ <script src="/js/other-user-dash.js"></script> 
+{{/if}}
 
-
-<script src="/js/dashboard.js"></script>

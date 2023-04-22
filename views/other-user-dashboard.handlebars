@@ -1,0 +1,30 @@
+     {{!-- creates a button to display each post a user has made for the dashboard tab --}}
+ <div class="d-flex flex-column flex-md-row align-items-center">
+    <div class="w-50 card mt-5 ml-md-5 text-center">
+        <img id="avatar" class="rounded-circle mx-auto mt-2 object-fit-scale" style="width: 150px; height: 150px;"
+        alt="Default Avatar" data-type='{{image}}' />
+        <h4 class="m-5">{{name}}</h4>
+        {{#if bio}}
+            <p class="m-2">{{bio}}</p>
+        {{/if}}
+    </div>
+    <div class="w-50 text-center text-white ml-md-5">
+        <h2 class="mt-5">{{name}}'s Posts</h2>
+    {{#each posts as |post|}}
+        <div class="card">
+                <div class="card-header text-center text-dark">
+                    {{post.title}}
+                </div>
+                <div class="card-body  text-dark">
+                    {{post.content}}
+                </div> 
+                 <div class="card-footer">
+                    <button id="comment-btn" class="btn btn-block btn-outline-info" type="button" data-type="{{post.id}}">Add Comment</button>
+                    <button id='view-comments-btn' class="float-right btn btn-link text-info" data-type="{{post.id}}"><i style="font-size: 1.5rem" class="fa-solid fa-comment-dots"></i></button>
+                </div>   
+        </div>
+    {{/each}}
+    <div class="text-center">
+        <button id="add-post"type="button" class="btn btn-outline-light btn-lg my-5 w-75">Add Post</button>
+    </div> 
+ </div>    

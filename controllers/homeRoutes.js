@@ -65,7 +65,8 @@ router.get('/dashboard/:id', async(req, res) => {
             include: [{ model: Post }],
         })
 
-        const post = postData.get({plain: true})
+        const post = postData.get({plain: true});
+        post.isCurrentUser = req.params.id == req.session.user_id
         console.log(post)
         res.render('dashboard', {
             ...post, 
