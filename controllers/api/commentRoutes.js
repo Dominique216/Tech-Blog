@@ -16,5 +16,17 @@ router.post('/', async (req, res) => {
     }
   });
 
-
+router.delete('/:id', async(req, res) => {
+  try {
+    const deleteComment = await Comment.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+    res.status(200).json(deleteComment)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+})
 module.exports = router;

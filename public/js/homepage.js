@@ -44,3 +44,30 @@ for(let i = 0; i < avatar.length; i++) {
     avatar[i].setAttribute('src', `/uploads/${avatarFile}`)
 }
 
+
+// handles deleting comments 
+
+const commentDeleteBtn = document.querySelectorAll('#comment-delete-btn');
+console.log(commentDeleteBtn)
+const handleDeleteComments = async (e) => {
+    if(e.target.hasAttribute('data-id')) {
+        const id = e.target.getAttribute('data-id');
+        const response = await fetch(`api/comment/${id}`, {
+            method: 'DELETE',
+        });
+        if(response.ok) {
+            window.location.reload()
+        } else {
+            alert('Failed to delete comment')
+        }
+    }
+}
+
+commentDeleteBtn.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    handleDeleteComments(e);
+})
+})
+
+
