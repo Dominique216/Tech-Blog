@@ -3,11 +3,35 @@ const { response } = require('express');
 const { Post, User, Comment } = require('../models');
 
 // render search user page
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
     if(req.session.loggedIn) {
-        res.render('search', {id: req.session.user_id})
+        try {
+            const userData = await User.findAll({attributes: { exclude: ['password'] }})
+            const users = userData.map((user) => {
+                return user.dataValues
+            });
+            const userNameData = await User.findAll({attributes: {include: ['name']}})
+            console.log(userNameData)
+            const userNames = userNameData.map((user) => {
+                return user.dataValues.name
+            });
+            // console.log(users)
+            res.render('search', {
+                usernames: userNames,
+                users: users,
+                id: req.session.user_id
+            });
+
+        } catch(err) {
+            console.log(err);
+            res.status(500).json(err)
+        }
+        
+    } else {
+        res.redirect('/login')
     }
 })
+
 
 // render comment page 
 router.get('/comment/:id', async (req, res) => {
@@ -67,7 +91,7 @@ router.get('/dashboard/:id', async(req, res) => {
 
         const post = postData.get({plain: true});
         post.isCurrentUser = req.params.id == req.session.user_id
-        console.log(post)
+        // console.log(post)
         res.render('dashboard', {
             ...post, 
             loggedIn: req.session.loggedIn,
