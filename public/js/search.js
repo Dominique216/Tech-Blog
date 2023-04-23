@@ -10,10 +10,33 @@ console.log(users);
 const findUser = (value) => {
     for(let i = 0; i < users.length; i++) {
         if(users[i].dataset.userName == value) {
-           users[i].classList.add('card')
+           users[i].classList.add('card');
            const userAvatar = document.createElement('img');
            userAvatar.setAttribute('src', `/uploads/${users[i].dataset.userImage}`)
+           userAvatar.classList.add('rounded-circle')
+           userAvatar.style.width = '150px'
+           userAvatar.style.height = '150px'
+           userAvatar.classList.add('mx-auto')
+           userAvatar.classList.add('my-3')
+          const userName = `${users[i].dataset.userName}`
+          const userNameText = document.createElement('h5')
+          userNameText.textContent = userName;
+          const viewProfileBtn = document.createElement('button')
+          // btn btn-outline-info mb-5 mx-5
+          const hrefForBtn = document.createElement('a')
+          hrefForBtn.setAttribute('href', `/dashboard/${users[i].dataset.id + 1}`)
+          viewProfileBtn.classList.add('btn')
+          viewProfileBtn.classList.add('btn-outline-info')
+          viewProfileBtn.textContent = 'View Profile'
+          viewProfileBtn.classList.add('m-2')
+          // viewProfileBtn.setAttribute('')
+          hrefForBtn.appendChild(viewProfileBtn)
+          // viewProfileBtn.classList.add()
            users[i].appendChild(userAvatar); 
+           users[i].appendChild(userNameText)
+           users[i].appendChild(hrefForBtn)
+
+           
         }
     }
 }
