@@ -24,7 +24,7 @@ const findUser = (value) => {
           const viewProfileBtn = document.createElement('button')
           // btn btn-outline-info mb-5 mx-5
           const hrefForBtn = document.createElement('a')
-          hrefForBtn.setAttribute('href', `/dashboard/${users[i].dataset.id + 1}`)
+          hrefForBtn.setAttribute('href', `/dashboard/${parseInt(users[i].dataset.id) + 1}`)
           viewProfileBtn.classList.add('btn')
           viewProfileBtn.classList.add('btn-outline-info')
           viewProfileBtn.textContent = 'View Profile'
